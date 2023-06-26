@@ -17,16 +17,15 @@ fullnameOverride: ""
 secret:
   name: nodebb-secrets
 
-env:
-  normal:
-    variable1: value1
-    variable2: value2
-    variable3: value3
-  secret:
-    variable4: value4
-    variable5: value5
-    variable6: value6
-
+# Environment variables to use
+env: {}
+  # - name: "USER_EMAIL"
+  #   value: "test@test.com"
+  # - name: "USER_PASSWORD"
+  #   valueFrom:
+  #     secretKeyRef:
+  #       name: mysecrets
+  #       key: test_user_password
 
 serviceAccount:
   # Specifies whether a service account should be created

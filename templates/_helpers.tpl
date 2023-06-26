@@ -60,37 +60,3 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
-
-
-
-{{/*
-Create the name of the secret to use
-*/}}
-{{- define "nodebb.secretName" -}}
-{{- if .Values.secret }}
-{{- default (include "nodebb.fullname" .) .Values.secret.name }}
-{{- else }}
-{{- default "default" "nodebb-secrets" }}
-{{- end }}
-{{- end }}
-
-
-
-{{/*
-Create the defined secrets
-*/}}
-{{- define "nodebb.secretEnvVariables"}}
-
-{{- if .Values.secret }}
-{{- if .Values.env.secret }}
-{{- $secretsName  :=  include "nodebb.secretName" . -}}
-{{- range $key, $val := .Values.env.secret }}
-- name: {{ $key }}
-  valueFrom:
-    secretKeyRef:
-      name: {{ $secretsName }}
-      key: {{ $key }}
-{{- end}}
-{{- end }}
-{{- end }}
-{{- end }}
